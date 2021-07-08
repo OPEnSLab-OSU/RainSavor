@@ -1,0 +1,30 @@
+"{\
+  'general':\
+  {\
+    'name':'Device',\
+    'instance':1,\
+    'interval':5000\
+  },\
+  'components':[\
+    {\
+      'name':'ADS1115',\
+      'params':'default'\
+      },\
+    {\
+      'name':'SHT31D',\
+      'params':'default'\
+    },\
+    {\
+      'name':'SD',\
+      'params':'default',\
+    },\
+    {\
+      'name':'DS3231',\
+      'params':'default',\
+    },\
+    {\
+      'name':'Sleep_Manager',\
+      'params':[true,false,1]\
+    }\
+  ]\
+}"

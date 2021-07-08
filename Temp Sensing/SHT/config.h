@@ -1,0 +1,14 @@
+"{\
+  'general':\
+  {\
+    'name':'Device',\
+    'instance':1,\
+    'interval':1000\
+  },\
+  'components':[\
+    {\
+      'name':'SHT31D',\
+      'params':'default'\
+    }\
+  ]\
+}"

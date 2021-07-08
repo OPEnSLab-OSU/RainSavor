@@ -1,0 +1,22 @@
+"{\
+  'general':\
+  {\
+    'name':'Device',\
+    'instance':1,\
+    'interval':5000\
+  },\
+  'components':[\
+    {\
+      'name':'ADS1115',\
+      'params':'default'\
+      },\
+    {\
+      'name':'SHT31D',\
+      'params':'default'\
+    },\
+    {\
+      'name':'SD',\
+      'params':[true,1000,10,'data',true]\
+    }\
+  ]\
+}"
