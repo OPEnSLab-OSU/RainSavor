@@ -1,0 +1,30 @@
+"{\
+  'general':\
+  {\
+    'name':'Device',\
+    'instance':1,\
+    'interval':5000\
+  },\
+  'components':[\
+    {\
+      'name':'ADS1115',\
+      'params':'default'\
+      },\
+      {\
+      'name':'SD',\
+      'params':[true,1000,10,'data',true]\
+    },\
+    {\
+      'name':'DS3231',\
+      'params':[11,true,false]\
+    },\
+    {\
+      'name':'Interrupt_Manager',\
+      'params':'default'\
+    },\
+    {\
+      'name':'Sleep_Manager'\
+      'params':'default'\
+    }\
+  ]\
+}"
