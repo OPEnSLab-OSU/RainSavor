@@ -105,7 +105,7 @@ void loop() {
     Loom.record();
     Loom.display_data();
     //Loom.pause();
-    //Loom.SDCARD().log();
+    Loom.SDCARD().log();
     delay(400);
     measure = 0;
   }

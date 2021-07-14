@@ -16,15 +16,7 @@
     },\
     {\
       'name':'DS3231',\
-      'params':[11,true,false]\
-    },\
-    {\
-      'name':'Interrupt_Manager',\
-      'params':'default'\
-    },\
-    {\
-      'name':'Sleep_Manager'\
-      'params':'default'\
+      'params':[11,true]\
     }\
   ]\
 }"

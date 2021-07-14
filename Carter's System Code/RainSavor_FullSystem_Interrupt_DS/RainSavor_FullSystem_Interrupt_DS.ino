@@ -1,4 +1,4 @@
- /*
+/*
  * OPEnS Lab
  * Software for the RainSavor Project
  * Dr Chet Udell, Dr Segura
@@ -14,9 +14,10 @@
  */
   
  
-//Initialize libraries
+//Initlialize libraries
 #include <Loom.h>
 #include <Wire.h>
+//#include <EnableInterrupt.h>
 
 
 //Declare Constants & Variables
@@ -48,7 +49,7 @@ LoomManager Loom{ &ModuleFactory };
 void interruptFunction() {
   if (measure == 0)
   {
-    LPrintln("\nInterrupt Detected");
+    LPrintln("\nButton Pressed Test");
     //Loom.measure();
     //Loom.package();
     measure = 1;
@@ -82,8 +83,9 @@ void setup() {
 
   //Interrupt stuff
   pinMode(pin_select, INPUT);
+  //enableInterrupt(pin_select, interruptFunction, FALLING); //CHANGE works
   Loom.InterruptManager().register_ISR(pin_select, interruptFunction, FALLING, ISR_Type::IMMEDIATE);
-  
+
   //Send data to AD5246 Variable Resistor
   send_data(VR_ADDR, VR_VAL);
 
