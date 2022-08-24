@@ -1,0 +1,30 @@
+"{\
+  'general':\
+  {\
+    'name':'Device',\
+    'instance':1,\
+    'interval':5000\
+  },\
+  'components':[\
+    {\
+      'name':'ADS1115',\
+      'params':'default'\
+      },\
+      {\
+      'name':'SD',\
+      'params':[true,1000,10,'data',true]\
+    },\
+    {\
+      'name':'DS3231',\
+      'params':[10,false,true]\
+    },\
+    {\
+      'name':'Analog',\
+      'params':[8,12,false,false,false,false,false,false,0,0,0,0,0,0,25]\
+    },\
+    {\
+      'name':'SHT31D',\
+      'params':'default'\
+    }\
+  ]\
+}"
