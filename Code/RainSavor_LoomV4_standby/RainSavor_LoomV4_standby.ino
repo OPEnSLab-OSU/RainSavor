@@ -39,7 +39,7 @@ Loom_ADS1115 ads(manager);
 
 //Declare Constants & Variables
 const byte VR_ADDR = 0x2E;  //I2C address for the AD5246 (variable resistor)
-const byte VR_VAL = 36; //out of 127, 1 being the lowest value
+const byte VR_VAL = 23; //out of 127, 1 being the lowest value
 
 #define pin_select 12
 volatile bool wakeup = false;
@@ -67,10 +67,6 @@ void setup() {
   // Initialize all in-use modules
   manager.initialize();
 
-  // Enable variable resistor - only works in setup, in loop hangs in endTransmission
-  send_data(VR_ADDR, VR_VAL);
-  manager.pause(50);
-
    //Interrupt stuff
   pinMode(pin_select, INPUT);
   attachInterrupt(digitalPinToInterrupt(pin_select), isrTrigger, LOW);
@@ -79,9 +75,19 @@ void setup() {
 void loop() {
   
   if(wakeup){
+    // Enable variable resistor
+    //have to set each time it wakes up
+    send_data(VR_ADDR, VR_VAL);
+    Serial.print("Resistor value: ");
+    Serial.println(VR_VAL);
+    manager.pause(50);
+    
     // Measure and package the data
     manager.measure();
-    manager.package();          
+    manager.package();   
+
+    //manager.addData("Analog Values", "Conductivity", ads.getAnalog(1));
+    manager.addData("VariableResistor","SetValue",VR_VAL);
   
     // Log the data to the SD card              
     hypnos.logToSD();
