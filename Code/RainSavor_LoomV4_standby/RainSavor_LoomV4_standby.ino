@@ -29,13 +29,13 @@ Loom_Analog analog(manager);
 
 // Create a new Hypnos object - need Will's version of hypnos.cpp and .h
 // Manager& man, HYPNOS_VERSION version, TIME_ZONE zone, bool use_custom_time, bool useSD, bool useRTC, bool use5V) 
-Loom_Hypnos hypnos(manager, HYPNOS_VERSION::V3_2, TIME_ZONE::PST, false, true, false, false);
+Loom_Hypnos hypnos(manager, HYPNOS_VERSION::V3_2, TIME_ZONE::PST, true, true, false, false);
 
 // Create the SHT classes
 Loom_SHT31 sht(manager);
 
 // Create ADS1115
-Loom_ADS1115 ads(manager);
+Loom_ADS1115 ads(manager, 0x48, true, false, adsGain_t::GAIN_TWOTHIRDS);
 
 //Declare Constants & Variables
 const byte VR_ADDR = 0x2E;  //I2C address for the AD5246 (variable resistor)
