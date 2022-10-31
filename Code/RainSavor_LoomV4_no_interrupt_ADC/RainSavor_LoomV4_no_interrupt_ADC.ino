@@ -1,3 +1,4 @@
+
 /**
  * OPEnS Lab
  * Software for the RainSavor Project
@@ -25,7 +26,7 @@
 Manager manager("RainSavor", 3);
 
 // Analog for reading battery voltage
-Loom_Analog analog(manager);
+Loom_Analog analog(manager); //add , A0 if reading analog pin
 
 // Create a new Hypnos object - need Will's version of hypnos.cpp and .h
 // Manager& man, HYPNOS_VERSION version, TIME_ZONE zone, bool use_custom_time, bool useSD, bool useRTC, bool use5V) 
@@ -39,15 +40,15 @@ Loom_ADS1115 ads(manager); //, 0x48, true, false, adsGain_t::GAIN_TWOTHIRDS);
 
 //Declare Constants & Variables
 const byte VR_ADDR = 0x2E;  //I2C address for the AD5246 (variable resistor)
-const byte VR_VAL = 23; //out of 127, 1 being the lowest value
+const byte VR_VAL = 12; //out of 127, 1 being the lowest value
 
-#define pin_select 12
-volatile bool wakeup = false;
+//#define interruptPin 12
+//volatile bool wakeup = false;
 
 // Called when the interrupt is triggered 
-void isrTrigger(){
+/*void isrFunc(){
    wakeup = true;
-}
+}*/
 
 //Custom function to communicate with I2C devices on the bus
 void send_data(byte addr, byte data) {
@@ -61,21 +62,26 @@ void setup() {
   // Wait 20 seconds for the serial console to open
   manager.beginSerial();
 
+  pinMode(LED_BUILTIN, OUTPUT);
+
   // Enable the hypnos rails, 3 SD pins, sd begin
   hypnos.enable();
 
   // Initialize all in-use modules
   manager.initialize();
 
-   //Interrupt stuff
-  pinMode(pin_select, INPUT);
-  attachInterrupt(digitalPinToInterrupt(pin_select), isrTrigger, LOW);
-  Serial.print("Interrupt set");
+   // Interrupt stuff
+ /* pinMode(interruptPin, INPUT);
+  LowPower.attachInterruptWakeup(interruptPin, isrFunc, LOW);
+  //attachInterrupt(digitalPinToInterrupt(interruptPin), isrFunc, RISING);
+  Serial.print("Interrupt set");*/
 }
 
 void loop() {
   
-  if(wakeup){
+  //if(wakeup){
+  // turn on built in LED to signal data collection
+    digitalWrite(LED_BUILTIN, HIGH);
     // Enable variable resistor
     //have to set each time it wakes up
     send_data(VR_ADDR, VR_VAL);
@@ -94,12 +100,22 @@ void loop() {
     hypnos.logToSD();
 
     // Print the current JSON packet
-    manager.pause(1000);
     manager.display_data();
-  
-    wakeup = false;
-  }
+
+    // turn off light to signal end of data processing 
+    digitalWrite(LED_BUILTIN, LOW);
+
+    hypnos.disable();
+
+    // delay between readings
+    manager.pause(5000);
+
+    hypnos.enable();
+    
+    //wakeup = false;
+  //}
 
   // Put the device into a deep sleep, operation HALTS here until the interrupt is triggered, don't wait for serial
-  hypnos.sleep(false);
+  //hypnos.sleep(false);
+
 }

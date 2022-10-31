@@ -19,7 +19,8 @@ using InterruptCallbackFunction = void (*)();
  */ 
 enum HYPNOS_VERSION{
     V3_2 = 10,
-    V3_3 = 11
+    V3_3 = 11,
+    ADALOGGER = 4
 };
 
 /**
@@ -164,6 +165,12 @@ class Loom_Hypnos : public Module{
         TimeSpan getSleepIntervalFromSD(String fileName);
 
         /**
+         * Get and set the timezone for the Hypnos from the SD card
+         * @param fileName Name of the file to pull information from
+         */ 
+        void getTimeZoneFromSD(String fileName);
+
+        /**
          * Read file from SD
          * @param fileName File to read from
          */ 
@@ -211,11 +218,14 @@ class Loom_Hypnos : public Module{
         void set_custom_time();                                             // Set a custom time on startup for the RTC to use
         void initializeRTC();                                               // Initialize RTC
 
-        DateTime get_utc_time();                                            // Convert the local time to UTC, accounts for daylight savings zones
-        TIME_ZONE timezone;                                                 // Timezone the RTC was set to
+		void createTimezoneMap();                                                           // Map Timezone Strings to Timezone enum
+        std::map<String, TIME_ZONE> timezoneMap;                                            // String to Timezone enum
 
+        DateTime get_utc_time();                                                            // Convert the local time to UTC, accounts for daylight savings zones
+        TIME_ZONE timezone;                                                                 // Timezone the RTC was set to                                              // Timezone the RTC was set to
+																																			  
         String dateTime_toString(DateTime time);                            // Convert a DateTime object to our desired format
-
+																										 
         DateTime time;                                                      // UTC time
         DateTime localTime;                                                 // Local time
         
