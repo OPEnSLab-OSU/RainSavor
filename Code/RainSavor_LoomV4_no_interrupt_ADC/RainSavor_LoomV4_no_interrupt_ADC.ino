@@ -40,7 +40,7 @@ Loom_ADS1115 ads(manager); //, 0x48, true, false, adsGain_t::GAIN_TWOTHIRDS);
 
 //Declare Constants & Variables
 const byte VR_ADDR = 0x2E;  //I2C address for the AD5246 (variable resistor)
-const byte VR_VAL = 12; //out of 127, 1 being the lowest value
+const byte VR_VAL = 28; //out of 127, 1 being the lowest value
 
 //#define interruptPin 12
 //volatile bool wakeup = false;
