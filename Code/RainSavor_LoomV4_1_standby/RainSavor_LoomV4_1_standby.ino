@@ -22,7 +22,7 @@
 #include <Sensors/I2C/Loom_SHT31/Loom_SHT31.h>
 #include <Sensors/I2C/Loom_ADS1115/Loom_ADS1115.h>
 
-Manager manager("RS2_", 2);
+Manager manager("RS4_", 4);
 
 // Analog for reading battery voltage
 Loom_Analog analog(manager); //add , A0 if reading analog pin
@@ -40,8 +40,8 @@ Loom_ADS1115 ads(manager);
 //Declare Constants & Variables
 const byte VR_ADDR = 0x2E;  //I2C address for the AD5246 (variable resistor)
 const byte VR_VAL = 16; //1 = 150 Ohms, 127 = 400 Ohms; lower value = larger maximum reading
-const float EC_SLOPE = 0.013973; //RS1: 0.013814; RS2: 0.013973; RS3: 0.013253; RS4: 0.015562; RS5: 0.014423; RS6: 0.013836 
-const float EC_INTERCEPT = -51.2529; // RS1:-51.8934; RS2: -51.2529; RS3: -51.6423; RS4: -65.2051; RS5: -62.0963; RS6: -55.3435 
+const float EC_SLOPE = 0.01694226; //RS1: 0.0153881; RS2: 0.012475457; RS3: 0.0165254; RS4: 0.01694226; RS5: 0.014423; RS6: 0.013836 
+const float EC_INTERCEPT = -85.53359678; // RS1:-79.42933705; RS2:-60.22810085; RS3: -80.71995509x; RS4: -85.53359678; RS5: -62.0963; RS6: -55.3435 
 const float TEMP_COEFF = 0.02;
 
 // Called when the interrupt is triggered 
